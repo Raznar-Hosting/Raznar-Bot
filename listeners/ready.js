@@ -1,17 +1,16 @@
-const discord = require('discord.js');
-const main = require('../index.js');
-
 module.exports = {
     name: 'ready',
-    async call(client) {
-        const client = main.client;
+    call: async (client) => {
+        const config = require('../config.json');
 
         client.user.setPresence({
             status: 'online',
             activity: {
-                name: 'Me being recoded',
-                type: 'WATCHING',
+                name: config['status']['message'],
+                type: config['status']['type'],
             }
-        })
+        });
+
+        console.log('Bot has fully started!');
     }
 }

@@ -11,27 +11,33 @@ class ListenManager {
      * @param {fs.PathLike} path to the listeners folder
      */
     loadListeners(client, path) {
-        if (!fs.existsSync(path) || !fs.statSync(path).isDirectory()) {
+        if (!fs.existsSync(path) || !fs.lstatSync(path).isDirectory()) {
             console.error(`Cannot find path named ${path} or the file isn't a directory!`);
             return;
         }
 
-        const fileList = fs.readdirSync(path)
-            .filter(value => !value.startsWith('_') && value.endsWith('.js'));
-
-        for (const file of fileList) {
-            const fullPath = path + file;
+        for (const file of fs.readdirSync(path)) {
+            const fullPath = path + (path.endsWith('/') ? '' : '/') + file;
 
             if (!fs.existsSync(fullPath))
                 continue;
+            // if the path is a dir, do another repeat scan but for that dir
+            if (fs.lstatSync(fullPath).isDirectory()) {
+                this.loadListeners(client, fullPath);
+                continue;
+            }
+            // file must be valid
+            if (file.startsWith('__') || !file.endsWith('.js'))
+                continue;
 
-            const listener = require(fullPath);
+            const listener = require(`.${fullPath}`);
             
             if (!listener || !listener.name || !listener.call)
                 continue;
             if (!(listener.call instanceof AsyncFunction))
                 continue;
 
+            console.log(`Loaded ${file}!`);
             client.on(listener.name, (...args) => listener.call(client, ...args));
         }
     }

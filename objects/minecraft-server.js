@@ -32,7 +32,7 @@ class MinecraftServer {
         this.online = data['online'];
         this.motd = data['motd'];
 
-        const arrayIcon = this.rawFavicon.split(';base64,');
+        const arrayIcon = data['favicon'].split(';base64,');
         this.iconType = arrayIcon[0].substring('data:image/'.length);
         this.iconData = arrayIcon[1];
 

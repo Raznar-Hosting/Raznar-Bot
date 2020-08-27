@@ -1,6 +1,7 @@
 const { Message, MessageEmbed, MessageAttachment } = require('discord.js');
 const axios = require('axios').default;
 const { MinecraftServer } = require('../../objects/minecraft-server.js');
+const config = require('../../config.json');
 
 module.exports = {
     name: 'mcserver',
@@ -11,16 +12,16 @@ module.exports = {
      * @param {string[]} args 
      * @param {Message} msg 
      */
-    async execute(prefix, args, msg) {
+    execute: async (prefix, args, msg) => {
         const channel = msg.channel;
 
-        if (args.length == 0)
-            return channel.send('Invalid arguments!');
+        if (args.length === 0)
+            return channel.send(`Usage: ${prefix}mcserver <server api>`);
 
         const address = args[0];
         const port = args[1] ? args[1] : '25565';
 
-        // number checl
+        // number check
         if (isNaN(port))
             return channel.send("That doesn't look like a port to me!");
 
@@ -42,12 +43,12 @@ module.exports = {
             .attachFiles(attachment)
             .setTitle('Minecraft Server')
             .setColor('RANDOM')
-            .addField('IP Address', `${address}:${port}`)
+            .addField('IP Address', address + (args[1] ? `:${port}` : ''))
             .addField('Players', `${server.currentPlayers}/${server.maxPlayers}`)
             .addField('Version', server.platform)
             .addField('MOTD', server.motd)
             .setThumbnail('attachment://' + attachment.name)
-            .setFooter('Copyright (c) 2020 Radiance Development Team');
+            .setFooter(config['footer']);
 
         await channel.send(embed);
     }
