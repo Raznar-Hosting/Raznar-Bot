@@ -1,6 +1,6 @@
 {
   "name": "radiance-bot",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "main": "index.js",
   "description": "The discord bot for Radiance Store",
   "scripts": {

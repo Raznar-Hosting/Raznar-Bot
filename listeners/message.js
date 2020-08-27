@@ -7,13 +7,13 @@ const { MessageEmbed, Client, Message } = require('discord.js');
 //       It also has cheat sheets for it.
 const blacklistedWords = [
     // anjing // bajing
-    /(ba)?(a|4)*nj(e|3|i|1)*(n)?g(an)?/gi,
+    /(ba)?(a|4)*nj(e|3|i|1)+n?g(an)?/gi,
     // monyet
     /m(o|0)*ny(e|3)*t/gi,
     // bangsat
     /b(a|4)*n?gs(a|4)*(t|d)/gi,
     // tolol
-    /t(o|0)*l(o|0)*l?/gi,
+    /t(o|0)+l(o|0)+l?/gi,
     // pantek
     /p(a|4)*nt(e|3)*k/gi,
     // goblok
