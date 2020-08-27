@@ -11,10 +11,9 @@ module.exports = {
             return channel.send('No permission!').then(m => m.delete({timeout: 3_000}));
 
         if (isNaN(args[0]))
-            return msg.channel.send('Please provide a valid amount to purge');
-
+            return msg.channel.send('Please provide a valid amount to purge!');
         if (args[0] > 100)
-            return msg.channel.send('Please give an amount less than 100');
+            return msg.channel.send('Please give an amount less than 100!');
 
         msg.channel.bulkDelete(args[0])
             .then(messages =>

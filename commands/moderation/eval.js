@@ -14,7 +14,7 @@ module.exports = {
             return channel.send('No permission!').then(m => m.delete({timeout: 3_000}));
         
         const channel = msg.channel;
-        if (args.length === 0)
+        if (!args[0])
             return channel.send(`Usage: ${prefix}eval <code>`);
 
         let codeInput = args.join(' ');
@@ -39,9 +39,12 @@ module.exports = {
         msg.delete({timeout: 50});
         try {
             let result = eval(codeInput);
+            // if the result isn't a string, then inspect the object 
+            // and get the inner result
             if (typeof result !== 'string')
                 result = util.inspect(result, {depth: 0})
 
+            // don't allow bot token to be shown
             if (result.includes(msg.client.token))
                 throw Error("You don't have the permission to access this!");
 

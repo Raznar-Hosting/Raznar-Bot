@@ -7,10 +7,10 @@ module.exports = {
             status: 'online',
             activity: {
                 name: config['status']['message'],
-                type: config['status']['type'],
+                type: config['status']['type']
             }
         });
 
-        console.log('Bot has fully started!');
+        console.log('\nBot has fully started!');
     }
 }

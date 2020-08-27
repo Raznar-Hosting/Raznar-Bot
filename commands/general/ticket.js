@@ -13,20 +13,21 @@ module.exports = {
         const channel = msg.channel;
         const guild = msg.guild;
 
-        if (sender.id !== '217970261230747648')
-            return channel.send('You cannot use this command yet!');
         if (!args[0])
             return module.exports.execute(prefix, ['help'], msg);
 
+        const config = require('../../config.json');
         const ticketdb = require('../../index.js').ticketdb;
-        const category = guild.channels.cache.get('743454700644597762');
-        const everyoneRole = guild.roles.cache.find(role => role.name === '@everyone');
+        const category = guild.channels.cache.get(config['ticket-category']);
+
+        const everyoneRole = guild.roles.cache.get(config['roles']['everyone'])
+        const supportRole = guild.roles.cache.get(config['roles']['support']);
 
         try {
             if (!category)
                 throw Error('Cannot find the category to hold the tickets!');
-            if (!everyoneRole)
-                throw Error('Cannot find `everyone` role!');
+            if (!everyoneRole || !supportRole)
+                throw Error('Cannot find certain role(s)!');
         } catch (error) {
             console.error(error);
             return channel.send(error.message);
@@ -76,15 +77,50 @@ module.exports = {
                     .run(sender.id, ticketChannel.id);
 
                 // tells the user that their ticket channel is creat
-                await ticketChannel.send(`${sender.toString()} your ticket has been created!`);
+                await ticketChannel.send(
+                    `${sender.toString()} your ticket has been created!`
+                    + `\n\n`
+                    + `Summon ${supportRole.toString()}`
+                );
                 await channel.send(
-                    `${sender.toString()} your ticket has been created! \nYou may go to ${ticketChannel.toString()}!`
+                    `${sender.toString()} your ticket has been created!`
+                    + `\nYou may go to ${ticketChannel.toString()}!`
                 );
 
                 break;
             }
             case 'delete':
             case 'close': {
+                if (args.length >= 2) {
+                    // only admin can delete other 
+                    if (!sender.hasPermission('ADMINISTRATOR'))
+                        return channel.send('No permission!').then(m => m.delete({ timeout: 3_000 }));
+
+                    const ticketChannel = Array.from(msg.mentions.channels.values())[0];
+                    // checks the mentioned channel
+                    if (!ticketChannel)
+                        return channel.send('Please mention the correct ticket channel!');
+
+                    const ticketId = ticketChannel.id
+                    const data = ticketdb.prepare('SELECT * FROM tickets WHERE channel_id = ?;')
+                        .get(ticketId);
+
+                    // checks if the channel is the same channel as the ticket channel
+                    if (!data)
+                        return channel.send("This channel isn't a ticket channel!");
+
+                    const userId = data['user_id'];
+                    const ticketOwner = guild.members.cache.get(userId);
+                    // notifies the ticket owner
+                    if (ticketOwner)
+                        ticketOwner.send('Your ticket channel named `' + ticketChannel.name + '` was deleted by ' + sender.user.tag + '!');
+
+                    ticketChannel.delete('Force ticket close');
+                    ticketdb.prepare('DELETE FROM tickets WHERE user_id = ?;')
+                        .run(userId);
+                    return;
+                }
+
                 const data = ticketdb.prepare('SELECT * FROM tickets WHERE user_id = ?;').get(sender.id);
                 if (!data)
                     return channel.send("You don't have a ticket!");
@@ -101,8 +137,6 @@ module.exports = {
                 break;
             }
             default: {
-                const config = require('../../config.json');
-
                 const embed = new MessageEmbed()
                     .setTitle('Ticket Help')
                     .setColor('RANDOM')

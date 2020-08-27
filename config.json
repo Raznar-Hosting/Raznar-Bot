@@ -4,5 +4,13 @@
     "status": {
         "type": "PLAYING",
         "message": "Nothing"
-    }
+    },
+    "roles": {
+        "everyone": "742574615498588221",
+        "ceo": "746987744558841857",
+        "support": "748448250151043082",
+        "plugin-maker": "746981499756216370",
+        "script-maker": ""
+    },
+    "ticket-category": "742910204420685885"
 }

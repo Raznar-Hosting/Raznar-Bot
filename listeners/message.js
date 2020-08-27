@@ -39,7 +39,7 @@ const blacklistedWords = [
     // faggot
     /f(a|4)*gg(o|0)*t/gi,
     // ngentot
-    /ng(e|3)*nt(o|0)*(t|d)/gi,
+    /ng(e|3)*nt(o|0|u)*(t|d)/gi,
     // coli
     /c(o|0)+l(i|1)+/gi,
     // kampret
