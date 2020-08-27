@@ -2,6 +2,7 @@ const { Client } = require('discord.js');
 const { CommandManager } = require('./manager/commands.js');
 const { ListenManager } = require('./manager/listeners.js');
 const sqlite = require('better-sqlite3');
+const fs = require('fs');
 
 const client = new Client({
     partials: ['USER', 'MESSAGE', 'REACTION']
@@ -21,6 +22,7 @@ listenManager.loadListeners(client, './listeners');
 
 cmdManager.startWorking(client);
 
+fs.mkdirSync('./db/')
 const ticketdb = sqlite('./db/ticket.db');
 ticketdb.prepare(`
     CREATE TABLE IF NOT EXISTS tickets (user_id VARCHAR(128) NOT NULL, channel_id VARCHAR(128) NOT NULL);
