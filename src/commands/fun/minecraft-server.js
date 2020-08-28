@@ -1,7 +1,7 @@
 const { Message, MessageEmbed, MessageAttachment } = require('discord.js');
 const axios = require('axios').default;
 const { MinecraftServer } = require('../../objects/minecraft-server.js');
-const config = require('../../config.json');
+const config = require('../../../resources/config.json');
 
 module.exports = {
     name: 'mcserver',

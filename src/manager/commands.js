@@ -92,8 +92,12 @@ class CommandManager {
 
         this.isWorking = true;
         client.on('message', async (msg) => {
-            const content = msg.content;
+            const config = require('../../resources/config.json');
+            const { channel, content } = msg;
 
+            // must be certain channels
+            if (!config.channels["bot-cmds"].includes(channel.id))
+                return;
             // the command sender must be a valid user
             if (msg.author.bot || msg.webhookID)
                 return;
@@ -109,7 +113,7 @@ class CommandManager {
 
             // executes the command if found
             try {
-                command.execute(this.prefix, args, msg);   
+                command.execute(this.prefix, args, msg);
             } catch (error) {
                 console.error(error);
             }

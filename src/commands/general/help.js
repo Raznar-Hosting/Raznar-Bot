@@ -1,5 +1,5 @@
 const { Message, MessageEmbed } = require("discord.js");
-const config = require('../../config.json');
+const config = require('../../../resources/config.json');
 
 module.exports = {
     name: 'help',

@@ -1,10 +1,6 @@
 {
     "prefix": "!",
     "footer": "Copyright (c) 2020 Radiance Development Team",
-    "status": {
-        "type": "PLAYING",
-        "message": "Nothing"
-    },
     "roles": {
         "everyone": "742574615498588221",
         "ceo": "746987744558841857",
@@ -12,5 +8,8 @@
         "plugin-maker": "746981499756216370",
         "script-maker": ""
     },
-    "ticket-category": "742910204420685885"
+    "channels": {
+        "ticket-category": "742910204420685885",
+        "bot-cmds": ["748097571003564122", "747299508626391121"]
+    }
 }

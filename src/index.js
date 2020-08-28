@@ -11,7 +11,23 @@ const client = new Client({
 // loads the .env
 require('dotenv').config();
 // loads the config.json
-const config = require('./config.json');
+const config = require('../resources/config.json');
+
+if (!fs.existsSync('./resources/presence.json')) {
+    presence = {
+        status: 'ONLINE',
+        activity: {
+            type: 'PLAYING',
+            message: '...'
+        }
+    };
+
+    fs.writeFileSync(
+        './resources/presence.json',
+        JSON.stringify(presence, null, 4),
+        { encoding: 'utf-8' }
+    );
+}
 
 const cmdManager = new CommandManager(config['prefix']);
 const listenManager = new ListenManager();

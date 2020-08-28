@@ -1,4 +1,4 @@
-const { Message, TextChannel, MessageEmbed } = require('discord.js');
+const { Message, MessageEmbed } = require('discord.js');
 
 module.exports = {
     name: 'ticket',
@@ -16,9 +16,9 @@ module.exports = {
         if (!args[0])
             return module.exports.execute(prefix, ['help'], msg);
 
-        const config = require('../../config.json');
+        const config = require('../../../resources/config.json');
         const ticketdb = require('../../index.js').ticketdb;
-        const category = guild.channels.cache.get(config['ticket-category']);
+        const category = guild.channels.cache.get(config['channels']['ticket-category']);
 
         const everyoneRole = guild.roles.cache.get(config['roles']['everyone'])
         const supportRole = guild.roles.cache.get(config['roles']['support']);

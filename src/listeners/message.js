@@ -119,7 +119,7 @@ module.exports = {
             if (client.user.id !== userId)
                 return;
 
-            const prefix = require('../config.json')['prefix'];
+            const prefix = require('../../resources/config.json')['prefix'];
             return channel.send('Hi there ' + msg.author.toString() + '! My command prefix is `' + prefix + '`!');
         }
     }
