@@ -42,7 +42,7 @@ class ListenManager {
                 continue;
 
             console.log(`Loaded listener from ${file}!`);
-            client.on(listener.name, (...args) => listener.call(...args));
+            client.on(listener.name, (...args) => listener.call(client, ...args));
         }
     }
 
