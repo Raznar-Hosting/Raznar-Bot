@@ -6,6 +6,7 @@ const config = require('../../../resources/config.json');
 module.exports = {
     name: 'mcserver',
     aliases: ['mc', 'minecraft', 'mcstats', 'mcapi'],
+    desc: 'Shows a minecraft server status',
     /**
      * 
      * @param {string} prefix 

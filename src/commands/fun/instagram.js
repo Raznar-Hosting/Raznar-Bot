@@ -6,6 +6,7 @@ const fs = require('fs');
 module.exports = {
     name: 'instagram',
     aliases: ['insta', 'ig'],
+    desc: 'You want to check someones instagram? Here you go',
     /**
      * @param {string} prefix
      * @param {string[]} args

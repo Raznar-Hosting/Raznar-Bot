@@ -3,6 +3,7 @@ const { Message, MessageEmbed } = require('discord.js');
 module.exports = {
     name: 'ticket',
     aliases: ['tickets', 'support', 'req', 'request'],
+    desc: 'Managers the tickets',
     /**
      * @param {string} prefix
      * @param {string[]} args

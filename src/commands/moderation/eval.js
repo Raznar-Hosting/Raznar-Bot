@@ -4,6 +4,7 @@ const util = require('util');
 module.exports = {
     name: 'eval',
     aliases: ['exec', 'evaluate', 'execute'],
+    desc: 'Evaluates a code (usually used for testing purposes)',
     /**
      * @param {string} prefix
      * @param {string[]} args

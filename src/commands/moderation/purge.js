@@ -1,13 +1,16 @@
+const { Message } = require('discord.js');
+
 module.exports = {
     name: 'purge',
     aliases: ['clear'],
+    desc: 'Clears a channel with a certain amount of messages',
     /**
      * @param {string} prefix
      * @param {string[]} args
      * @param {Message} msg
      */
     execute: async (prefix, args, msg) => {
-        if (!msg.member.hasPermission('ADMINISTRATOR'))
+        if (!msg.member.hasPermission('MANAGE_MESSAGES'))
             return channel.send('No permission!').then(m => m.delete({timeout: 3_000}));
 
         if (isNaN(args[0]))

@@ -1,6 +1,7 @@
 {
     "prefix": "!",
     "footer": "Copyright (c) 2020 Radiance Development Team",
+    "bot-lock": true,
     "roles": {
         "everyone": "742574615498588221",
         "ceo": "746987744558841857",

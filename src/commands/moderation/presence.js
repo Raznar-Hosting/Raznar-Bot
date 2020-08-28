@@ -5,6 +5,7 @@ const fs = require('fs');
 module.exports = {
     name: 'presence',
     aliases: [],
+    desc: 'Change the bot presence such as status and the message',
     /**
      * @param {string} prefix
      * @param {string[]} args
@@ -16,7 +17,7 @@ module.exports = {
         if (!msg.member.hasPermission('ADMINISTRATOR'))
             return channel.send('No permission!').then(m => m.delete({ timeout: 3_000 }));
         if (!args[0])
-            return channel.send(`Usage: ${prefix}status [type/message]`);
+            return channel.send(`Usage: ${prefix}presence [status/type/message]`);
 
         const presence = require('../../../resources/presence.json');
         switch (args[0].toLowerCase()) {

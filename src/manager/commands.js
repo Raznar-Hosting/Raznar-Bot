@@ -97,8 +97,8 @@ class CommandManager {
             const config = require('../../resources/config.json');
             const { channel, content } = msg;
 
-            // must be certain channels
-            if (!config.channels["bot-cmds"].includes(channel.id))
+            // must be certain channels if bot-lock is enabled
+            if (config['bot-lock'] && !config.channels['bot-cmds'].includes(channel.id))
                 return;
             // the command sender must be a valid user
             if (msg.author.bot || msg.webhookID)
