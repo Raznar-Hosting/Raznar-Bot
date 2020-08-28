@@ -1,0 +1,16 @@
+*"A game store that sells a variety of different extension to a game such as plugin creation, discord bots and game hosting."*
+
+*"A game store that sells a variety of different extension to a game such as plugin creation, discord bots and game hosting."*
+
+**Available Services:**```yaml
+  - Discord Bot creation service
+  - Minecraft Plugin Creation service
+  - Server Panel installation service (Pterodactyl)
+```
+**Coming soon:**
+```yaml
+  - Gta 5 Extension creation Service (LUA)
+  - Gta SAMP Extension creation Service (Pawno)
+  - Minecraft Hosting services
+```
+https://discord.gg/6STaDcY
