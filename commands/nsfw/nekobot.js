@@ -32,7 +32,7 @@ module.exports = {
                 }
             });
     
-            const data = JSON.parse(response.data);
+            const data = response.data;
             embed.setColor(data['color'])
                 .setImage(data['message']);
 

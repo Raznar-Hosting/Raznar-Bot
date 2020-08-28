@@ -32,9 +32,8 @@ module.exports = {
                 }
             });
     
-            const data = JSON.parse(response.data);
+            const data = response.data;
             embed.setImage(data['url']);
-
             return channel.send(embed);
         } catch (error) {
             return channel.send('Failed to fetch image!');
