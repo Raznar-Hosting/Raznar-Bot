@@ -61,7 +61,7 @@ module.exports = {
                     await client.user.setPresence({ activity: { type: presence['activiy']['type'], name: message } })
                     presence['activiy']['message'] = message;
                 } catch (error) {
-                    return channel.send('Failed to set bot status message!');
+                    return channel.send('Failed to set bot presence message!');
                 }
 
                 channel.send('Successfully set bot presence message to `' + message + '`!')
