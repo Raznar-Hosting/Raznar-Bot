@@ -35,7 +35,7 @@ class CommandManager {
 
         for (const file of fs.readdirSync(filePath)) {
             const fullFilePath = filePath + (filePath.endsWith('/') ? '' : '/') + file;
-            const fullRequirePath = requirePath + file
+            const fullRequirePath = requirePath + '/' + file
 
             if (!fs.existsSync(fullFilePath))
                 continue;
