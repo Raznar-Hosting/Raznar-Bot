@@ -40,8 +40,8 @@ module.exports = {
 
             embed.setDescription(
                 '**Name:** ' + command.name
-                + '\n**Aliases:** ' + command.aliases
-                + '\n**Description**: ' + (command.desc ? 'None' : command.desc)
+                + '\n**Aliases:** [' + command.aliases.join(', ') + ']'
+                + '\n**Description**: ' + (!command.desc ? 'None' : command.desc)
             );
         }
 
