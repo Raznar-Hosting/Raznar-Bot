@@ -1,7 +1,5 @@
 *"A game store that sells a variety of different extension to a game such as plugin creation, discord bots and game hosting."*
 
-*"A game store that sells a variety of different extension to a game such as plugin creation, discord bots and game hosting."*
-
 **Available Services:**```yaml
   - Discord Bot creation service
   - Minecraft Plugin Creation service
