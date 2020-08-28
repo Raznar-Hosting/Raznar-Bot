@@ -1,6 +1,6 @@
 const { Client } = require('discord.js');
 const fs = require('fs');
-const { AsyncFunction } = require('../objects/misc.js');
+const { AsyncFunction } = require('../objects/misc');
 
 class CommandManager {
 
@@ -24,29 +24,31 @@ class CommandManager {
     /**
      * loads all commands from a folder that contains all commands instances
      * 
-     * @param {fs.PathLike} path to the commands folder
+     * @param {fs.PathLike} filePath to the commands folder
+     * @param {fs.PathLike} requirePath to be able to use the 'require' function
      */
-    loadCommands(path) {
-        if (!fs.existsSync(path) || !fs.lstatSync(path).isDirectory()) {
-            console.error(`Cannot find path named ${path} or the file isn't a directory!`);
+    loadCommands(filePath, requirePath) {
+        if (!fs.existsSync(filePath) || !fs.lstatSync(filePath).isDirectory()) {
+            console.error(`Cannot find path named ${filePath} or the file isn't a directory!`);
             return;
         }
 
-        for (const file of fs.readdirSync(path)) {
-            const fullPath = path + (path.endsWith('/') ? '' : '/') + file;
+        for (const file of fs.readdirSync(filePath)) {
+            const fullFilePath = filePath + (filePath.endsWith('/') ? '' : '/') + file;
+            const fullRequirePath = requirePath + file
 
-            if (!fs.existsSync(fullPath))
+            if (!fs.existsSync(fullFilePath))
                 continue;
             // if the path is a dir, do another repeat scan but for that dir
-            if (fs.lstatSync(fullPath).isDirectory()) {
-                this.loadCommands(fullPath);
+            if (fs.lstatSync(fullFilePath).isDirectory()) {
+                this.loadCommands(fullFilePath, fullRequirePath);
                 continue;
             }
             // file must be valid
             if (file.startsWith('__') || !file.endsWith('.js'))
                 continue;
 
-            const command = require(`.${fullPath}`);
+            const command = require(fullRequirePath);
 
             // validates the command
             if (!command || !command.name || this.findCommand(command.name))
@@ -55,7 +57,7 @@ class CommandManager {
             if (!(command.execute instanceof AsyncFunction))
                 continue;
 
-            console.log(`Loaded ${file}!`);
+            console.log(`Loaded commands from ${file}!`);
             // adds the command
             this.commandMap.set(command.name, command);
         }
