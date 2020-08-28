@@ -33,8 +33,8 @@ const cmdManager = new CommandManager(config['prefix']);
 const listenManager = new ListenManager();
 
 // loads the commands and listeners
-cmdManager.loadCommands('./src/commands');
-listenManager.loadListeners(client, './src/listeners');
+cmdManager.loadCommands('./src/commands', '../commands');
+listenManager.loadListeners(client, './src/listeners', '../listeners');
 
 cmdManager.startWorking(client);
 
