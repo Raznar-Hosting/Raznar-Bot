@@ -1,4 +1,4 @@
-class MinecraftServer {
+export class MinecraftServer {
 
     /** the server online status */
     public readonly online: boolean;

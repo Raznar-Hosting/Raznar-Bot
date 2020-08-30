@@ -68,7 +68,7 @@ export class CommandManager {
      * 
      * @param dirPath the directory (file) path
      */
-    public loadCommands(dirPath: fs.PathLike) {
+    public loadCommands(dirPath: fs.PathLike): void {
         if (!fs.existsSync(dirPath))
             throw Error('Cannot find the commands folder!');
 
@@ -87,6 +87,7 @@ export class CommandManager {
             try {
                 const resolvedPath = path.resolve(filePath);
                 // loads the command module
+                // eslint-disable-next-line @typescript-eslint/no-var-requires
                 const command: Command = require(resolvedPath).command;
                 if (!command)
                     continue;
@@ -104,12 +105,12 @@ export class CommandManager {
      * 
      * @param name the command name or alias
      */
-    public findCommand(name: string) {
+    public findCommand(name: string): Command | undefined {
         if (!name)
             return;
 
         // search based on name
-        let command = this.commandMap.get(name);
+        const command = this.commandMap.get(name);
         if (command)
             return command;
 
@@ -124,7 +125,7 @@ export class CommandManager {
      * @param client the client object
      * @param configPath the path to the config.json
      */
-    public startWorking(client: Client, configPath?: fs.PathLike) {
+    public startWorking(client: Client, configPath?: fs.PathLike): void {
         if (this.isWorking)
             throw Error('The command worker is already working!');
 
@@ -141,6 +142,7 @@ export class CommandManager {
             // check the bot-lock
             if (configPath) {
                 const resolvedPath = path.resolve(configPath.toString());
+                // eslint-disable-next-line @typescript-eslint/no-var-requires
                 const config: Config = require(resolvedPath);
 
                 if (config['bot-lock'] && !config['channels']['bot-cmds'].includes(channel.id))

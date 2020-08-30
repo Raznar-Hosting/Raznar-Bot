@@ -1,0 +1,20 @@
+{
+    "env": {
+        "node": true,
+        "es6": true,
+        "commonjs": true
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+        "semi": "error",
+        "indent": "warn",
+        "prefer-const": "error"
+    }
+}

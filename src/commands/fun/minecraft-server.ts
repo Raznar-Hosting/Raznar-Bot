@@ -1,13 +1,15 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import axios from 'axios';
 import { Message, MessageAttachment, MessageEmbed } from 'discord.js';
 import { Command } from '../../managers/commands';
+import { MinecraftServer } from '../../objects/minecraft-server';
 import { Config } from '../../objects/types';
 
 class MinecraftServerCommand extends Command {
 
-    public name: string = 'mcserver';
+    public name = 'mcserver';
     public aliases: string[] = ['mc', 'minecraft', 'mcstats', 'mcapi'];
-    public desc: string = 'Shows a minecraft server status';
+    public desc = 'Shows a minecraft server status';
 
     public async execute(prefix: string, args: string[], msg: Message) {
         const channel = msg.channel;

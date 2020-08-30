@@ -20,7 +20,7 @@ import path from 'path';
  *      });
  * }
  */
-export function loadListeners(client: Client, dirPath: fs.PathLike) {
+export function loadListeners(client: Client, dirPath: fs.PathLike): void {
     // checks directory existence
     if (!fs.existsSync(dirPath))
         return;
@@ -42,6 +42,7 @@ export function loadListeners(client: Client, dirPath: fs.PathLike) {
 
         // loads the listener
         try {
+            // eslint-disable-next-line @typescript-eslint/no-var-requires
             const listener = require(resolvedPath);
             listener.callEvent(client);
         } catch (error) {

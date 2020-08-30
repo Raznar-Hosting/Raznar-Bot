@@ -60,7 +60,7 @@ const blacklistedWords = [
     /b(o|0)+k(e|3)+p/gi
 ];
 
-export function callEvent(client: Client) {
+export function callEvent(client: Client): void {
     client.on('message', async (msg) => {
         const { channel, content } = msg;
 
@@ -100,6 +100,7 @@ export function callEvent(client: Client) {
             if (client.user?.id !== userId)
                 return;
 
+            // eslint-disable-next-line @typescript-eslint/no-var-requires
             const prefix = require('../../resources/config.json')['prefix'];
             return channel.send('Hi there ' + msg.author.toString() + '! My command prefix is `' + prefix + '`!');
         }

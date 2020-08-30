@@ -1,4 +1,4 @@
-import { ActivityType, Client, PresenceStatusData } from "discord.js"
+import { ActivityType, PresenceStatusData } from "discord.js"
 
 /** the config typings */
 export type Config = {
