@@ -1,4 +1,4 @@
-const { MessageEmbed, Client, Message } = require('discord.js');
+import { Client, MessageEmbed } from "discord.js";
 
 // The blacklisted words in regex forms
 // 
@@ -60,15 +60,9 @@ const blacklistedWords = [
     /b(o|0)+k(e|3)+p/gi
 ];
 
-module.exports = {
-    name: 'message',
-    /**
-     * @param {Client} client
-     * @param {Message} msg
-     */
-    call: async (client, msg) => {
-        const channel = msg.channel;
-        const content = msg.content;
+export function callEvent(client: Client) {
+    client.on('message', async (msg) => {
+        const { channel, content } = msg;
 
         // don't allow bot to mention the bot
         if (msg.author.bot)
@@ -76,19 +70,6 @@ module.exports = {
         // don't allow dm
         if (channel.type === 'dm')
             return channel.send("The bot doesn't support DMs!");
-
-        // broken
-        //
-        // if (msg.channel.name != "advertise" && msg.content.includes != "discord.gg" || msg.content.includes != "discord.io") {
-        //     await msg.delete();
-
-        //     const embed = new MessageEmbed()
-        //         .setDescription("Dont be blind mang, go advertise in <#747304614898171905>")
-        //         .setColor('RED')
-        //         .setFooter(config['footer']);
-
-        //     return channel.send(embed).then(m => m.delete({ timeout: 3_000 }));
-        // }
 
         // in this one line of code
         // it uses the badwords regex list to find a bad word within the message
@@ -116,11 +97,11 @@ module.exports = {
         if (foundMention) {
             const userId = foundMention[1]
             // another check to determine if the mentioned user is the bot
-            if (client.user.id !== userId)
+            if (client.user?.id !== userId)
                 return;
 
             const prefix = require('../../resources/config.json')['prefix'];
             return channel.send('Hi there ' + msg.author.toString() + '! My command prefix is `' + prefix + '`!');
         }
-    }
+    });
 }

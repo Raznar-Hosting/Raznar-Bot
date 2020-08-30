@@ -1,28 +1,28 @@
 class MinecraftServer {
 
     /** the server online status */
-    online = false;
+    public readonly online: boolean;
     /** the server motd */
-    motd = '';
+    public readonly motd: string;
     /** the server icon file type */
-    iconType = '';
+    public readonly iconType: string;
     /** the server icon (base64) data */
-    iconData = '';
+    public readonly iconData: string;
 
     /** the server max players */
-    maxPlayers = 0;
+    public readonly maxPlayers: number;
     /** the server current players */
-    currentPlayers = 0;
+    public readonly currentPlayers: number;
 
     /** the server platform name */
-    platform = '';
+    public readonly platform: string;
     /** the server protocol */
-    protocol = 0;
+    public readonly protocol: number;
 
     /**
-     * @param {object} data the json object
+     * @param data the json object
      */
-    constructor(data) {
+    constructor(data: any) {
         if (typeof data !== 'object')
             throw TypeError('Data type must be an object!');
 
@@ -44,5 +44,3 @@ class MinecraftServer {
     }
 
 }
-
-module.exports = { MinecraftServer }

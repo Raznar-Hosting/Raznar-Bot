@@ -1,19 +1,15 @@
-const { Message, MessageEmbed, MessageAttachment } = require('discord.js');
-const axios = require('axios').default;
-const { MinecraftServer } = require('../../objects/minecraft-server.js');
-const config = require('../../../resources/config.json');
+import axios from 'axios';
+import { Message, MessageAttachment, MessageEmbed } from 'discord.js';
+import { Command } from '../../managers/commands';
+import { Config } from '../../objects/types';
 
-module.exports = {
-    name: 'mcserver',
-    aliases: ['mc', 'minecraft', 'mcstats', 'mcapi'],
-    desc: 'Shows a minecraft server status',
-    /**
-     * 
-     * @param {string} prefix 
-     * @param {string[]} args 
-     * @param {Message} msg 
-     */
-    execute: async (prefix, args, msg) => {
+class MinecraftServerCommand extends Command {
+
+    public name: string = 'mcserver';
+    public aliases: string[] = ['mc', 'minecraft', 'mcstats', 'mcapi'];
+    public desc: string = 'Shows a minecraft server status';
+
+    public async execute(prefix: string, args: string[], msg: Message) {
         const channel = msg.channel;
 
         if (args.length === 0)
@@ -23,7 +19,7 @@ module.exports = {
         const port = args[1] ? args[1] : '25565';
 
         // number check
-        if (isNaN(port))
+        if (isNaN(+port))
             return channel.send("That doesn't look like a port to me!");
 
         let server;
@@ -38,10 +34,11 @@ module.exports = {
         }
 
         const encodedIcon = Buffer.from(server.iconData, 'base64');
-        const attachment = new MessageAttachment(encodedIcon, `${address}.${server.iconType}`)
+        const attachment = new MessageAttachment(encodedIcon, `${address}.${server.iconType}`);
+        const config: Config = require('../../../resources/config.json')
 
         const embed = new MessageEmbed()
-            .attachFiles(attachment)
+            .attachFiles([attachment])
             .setTitle('Minecraft Server')
             .setColor('RANDOM')
             .addField('IP Address', address + (args[1] ? `:${port}` : ''))
@@ -49,8 +46,11 @@ module.exports = {
             .addField('Version', server.platform)
             .addField('MOTD', server.motd)
             .setThumbnail('attachment://' + attachment.name)
-            .setFooter(config['footer']);
+            .setFooter(config.footer);
 
         await channel.send(embed);
     }
+
 }
+
+export const command = new MinecraftServerCommand();

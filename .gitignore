@@ -2,3 +2,5 @@
 /.env
 /test/*
 /db/*
+/dist/*
+/old_src/*
