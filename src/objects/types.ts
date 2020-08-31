@@ -15,6 +15,7 @@ export type Config = {
         everyone: string,
         ceo: string,
         support: string,
+        admin: string,
         'plugin-maker': string,
     },
     channels:{
