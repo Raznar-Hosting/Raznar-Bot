@@ -40,7 +40,8 @@ class TicketCommand extends Command {
         const supportRole = guild?.roles.cache.get(config.roles.support);
         const adminRole = guild?.roles.cache.get(config.roles.admin);
 
-        const ticketTypes = ['SUPPORT', 'SERVICE', 'ADDON', 'SERVERS'];
+        // available ticket types
+        const ticketTypes = ['SUPPORT', 'SERVICE', 'ADDON', 'SERVER'];
 
         try {
             if (!category)
@@ -104,6 +105,7 @@ class TicketCommand extends Command {
                     `${member?.toString()} your ticket has been created!`
                     + `\n\n`
                     + `Summon ${supportRole.toString()}`
+                    + `It seems that ${member?.toString()} is asking for ${type}`
                 );
                 await channel.send(
                     `${member?.toString()} your ticket has been created!`
