@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable indent */
 /* eslint-disable @typescript-eslint/no-var-requires */
@@ -67,7 +68,7 @@ class TicketCommand extends Command {
                     const ticketChannel = guild?.channels.cache.get(data['channel_id']);
                     // prevents user to have more than 1 ticket channel
                     if (ticketChannel)
-                        return channel.send(`You already have a ticket! Please open ${ticketChannel.toString()} to view your ticket!`)
+                        return channel.send(`You already have a ticket! Please open ${ticketChannel.toString()} to view your ticket!`);
 
                     // if the ticket channel cannot be found
                     // deletes the data
