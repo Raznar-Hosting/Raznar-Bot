@@ -103,9 +103,9 @@ class TicketCommand extends Command {
                 // tells the user that their ticket channel is creat
                 await ticketChannel?.send(
                     `${member?.toString()} your ticket has been created!`
-                    + `\n\n`
-                    + `Summon ${supportRole.toString()}`
-                    + `It seems that ${member?.toString()} is asking for ${type}`
+                    + `\n`
+                    + `\nSummon ${supportRole.toString()}`
+                    + `\nIt seems that ${member?.toString()} is asking for ${type}`
                 );
                 await channel.send(
                     `${member?.toString()} your ticket has been created!`
