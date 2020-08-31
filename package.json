@@ -1,6 +1,6 @@
 {
   "name": "radiance-bot",
-  "version": "2.7.4",
+  "version": "2.8.4",
   "main": "dist/index.js",
   "description": "The discord bot for Radiance Store",
   "scripts": {
@@ -20,6 +20,8 @@
     "node": "12.x"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "^5.4.0",
+    "@types/cheerio": "^0.22.21",
     "@types/mathjs": "^6.0.5",
     "@typescript-eslint/eslint-plugin": "^3.10.1",
     "@typescript-eslint/parser": "^3.10.1",

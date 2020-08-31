@@ -1,7 +1,7 @@
 import { Client } from 'discord.js';
 import { Presence } from '../objects/types';
 
-export function callEvent(client: Client) {
+export function callEvent(client: Client): void {
     client.on('ready', async () => {
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         const presence: Presence = require('../../resources/presence.json');

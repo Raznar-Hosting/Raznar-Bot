@@ -1,4 +1,6 @@
-import { ActivityType, PresenceStatusData } from "discord.js"
+import { ActivityType, Client, PresenceStatusData } from 'discord.js';
+import { CommandManager } from '../managers/commands';
+import { Database } from 'better-sqlite3';
 
 /** the config typings */
 export type Config = {
@@ -25,7 +27,7 @@ export type Config = {
 
 export type Presence = {
     /** the presence status */
-    status: PresenceStatusData,
+    status: 'ONLINE' | 'OFFLINE' | 'IDLE' | 'DND',
     /** the presence activity */
     activity: {
         /** the presence type */
@@ -33,4 +35,10 @@ export type Presence = {
         /** the presence message */
         message: string
     }
+}
+
+export type Package = {
+    cmdManager: CommandManager,
+    client: Client,
+    ticketdb: Database
 }

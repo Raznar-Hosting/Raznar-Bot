@@ -15,6 +15,6 @@
     "rules": {
         "semi": "error",
         "indent": "warn",
-        "prefer-const": "error"
+        "prefer-const": "error",
     }
 }

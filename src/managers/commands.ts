@@ -1,6 +1,5 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Client, Message } from 'discord.js';
-import { Config } from '../objects/types';
-
 import fs from 'fs';
 import path from 'path';
 
@@ -138,16 +137,16 @@ export class CommandManager {
             // executor cannot be bot or a webhook
             if (author.bot || msg.webhookID)
                 return;
-            // if config path parameter is filled
-            // check the bot-lock
-            if (configPath) {
-                const resolvedPath = path.resolve(configPath.toString());
-                // eslint-disable-next-line @typescript-eslint/no-var-requires
-                const config: Config = require(resolvedPath);
+            // // if config path parameter is filled
+            // // check the bot-lock
+            // if (configPath) {
+            //     const resolvedPath = path.resolve(configPath.toString());
+            //     // eslint-disable-next-line @typescript-eslint/no-var-requires
+            //     const config: Config = require(resolvedPath);
 
-                if (config['bot-lock'] && !config['channels']['bot-cmds'].includes(channel.id))
-                    return;
-            }
+            //     if (config['bot-lock'] && !config['channels']['bot-cmds'].includes(channel.id))
+            //         return;
+            // }
             // to execute a command a prefix is needed
             if (!content.startsWith(this.prefix))
                 return;

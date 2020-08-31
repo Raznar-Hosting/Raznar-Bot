@@ -37,7 +37,7 @@ class MinecraftServerCommand extends Command {
 
         const encodedIcon = Buffer.from(server.iconData, 'base64');
         const attachment = new MessageAttachment(encodedIcon, `${address}.${server.iconType}`);
-        const config: Config = require('../../../resources/config.json')
+        const config: Config = require('../../../resources/config.json');
 
         const embed = new MessageEmbed()
             .attachFiles([attachment])

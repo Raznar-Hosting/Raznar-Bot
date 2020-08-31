@@ -95,7 +95,7 @@ export function callEvent(client: Client): void {
 
         // if the user mentions the bot, it'll send the command prefix to use the bot
         if (foundMention) {
-            const userId = foundMention[1]
+            const userId = foundMention[1];
             // another check to determine if the mentioned user is the bot
             if (client.user?.id !== userId)
                 return;
