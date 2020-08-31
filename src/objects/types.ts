@@ -18,7 +18,7 @@ export type Config = {
         admin: string,
         'plugin-maker': string,
     },
-    channels:{
+    channels: {
         /** the ticket category channel id */
         'ticket-category': string,
         /** the bot commands channel ids */
