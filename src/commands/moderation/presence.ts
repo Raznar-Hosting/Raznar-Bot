@@ -11,7 +11,7 @@ class PresenceCommand extends Command {
     public aliases: string[] = [];
     public desc = 'Change the bot presence such as status and the message';
 
-    public async execute(prefix: string, args: string[], msg: Message) {
+    public async execute(prefix: string, args: string[], msg: Message): Promise<any> {
         const { channel, client, member } = msg;
 
         if (!member?.hasPermission('ADMINISTRATOR'))
@@ -70,7 +70,7 @@ class PresenceCommand extends Command {
                 break;
             }
             default:
-                return module.exports.execute(prefix, [], msg);
+                return await this.execute(prefix, [], msg);
         }
 
         const json = JSON.stringify(presence, null, 4);

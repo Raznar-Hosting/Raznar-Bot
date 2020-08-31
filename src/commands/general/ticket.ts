@@ -12,11 +12,11 @@ class TicketCommand extends Command {
     public aliases: string[] = ['tickets', 'support', 'req', 'request'];
     public desc = 'Managers the tickets';
 
-    public async execute(prefix: string, args: string[], msg: Message) {
+    public async execute(prefix: string, args: string[], msg: Message): Promise<any> {
         const { member, channel, guild } = msg;
 
         if (!args[0])
-            return module.exports.execute(prefix, ['help'], msg);
+            return await this.execute(prefix, ['help'], msg);
 
         const config: Config = require('../../../resources/config.json');
         const packaging: Package = require('../../index').objects;
