@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { Message } from 'discord.js';
+import { ActivityType, Message, PresenceStatusData } from 'discord.js';
 import { Command } from '../../managers/commands';
 import { Presence } from '../../objects/types';
 import fs from 'fs';
@@ -27,8 +27,8 @@ class PresenceCommand extends Command {
 
                 const status = args[1].toUpperCase();
                 try {
-                    await client.user?.setPresence({ status: status });
-                    presence.status = status;
+                    await client.user?.setPresence({ status: status as PresenceStatusData });
+                    presence.status = status as Presence['status'];
                 } catch (error) {
                     return channel.send('Failed to set bot presence status!');
                 }
@@ -43,8 +43,8 @@ class PresenceCommand extends Command {
 
                 const type = args[1].toUpperCase();
                 try {
-                    await client.user?.setPresence({ activity: { type: type, name: presence.activity.message } });
-                    presence.activity.type = type;
+                    await client.user?.setPresence({ activity: { type: type as ActivityType, name: presence.activity.message } });
+                    presence.activity.type = type as ActivityType;
                 } catch (error) {
                     return channel.send('Failed to set bot presence type!');
                 }

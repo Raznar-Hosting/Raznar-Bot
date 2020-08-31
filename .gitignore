@@ -4,3 +4,4 @@
 /db/*
 /dist/*
 /old_src/*
+/resources/presence.json

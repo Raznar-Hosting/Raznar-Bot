@@ -86,13 +86,14 @@ export class CommandManager {
             try {
                 const resolvedPath = path.resolve(filePath);
                 // loads the command module
-                // eslint-disable-next-line @typescript-eslint/no-var-requires
                 const command: Command = require(resolvedPath).command;
                 if (!command)
                     continue;
 
                 // stores the command
                 this.commandMap.set(command.name, command);
+
+                console.log(`Loaded ${file}`);
             } catch (error) {
                 console.error(error);
             }
@@ -124,7 +125,7 @@ export class CommandManager {
      * @param client the client object
      * @param configPath the path to the config.json
      */
-    public startWorking(client: Client, configPath?: fs.PathLike): void {
+    public startWorking(client: Client): void {
         if (this.isWorking)
             throw Error('The command worker is already working!');
 
@@ -137,17 +138,6 @@ export class CommandManager {
             // executor cannot be bot or a webhook
             if (author.bot || msg.webhookID)
                 return;
-            // // if config path parameter is filled
-            // // check the bot-lock
-            // if (configPath) {
-            //     const resolvedPath = path.resolve(configPath.toString());
-            //     // eslint-disable-next-line @typescript-eslint/no-var-requires
-            //     const config: Config = require(resolvedPath);
-
-            //     if (config['bot-lock'] && !config['channels']['bot-cmds'].includes(channel.id))
-            //         return;
-            // }
-            // to execute a command a prefix is needed
             if (!content.startsWith(this.prefix))
                 return;
 

@@ -1,4 +1,4 @@
-import { Client } from 'discord.js';
+import { Client, PresenceStatusData } from 'discord.js';
 import { Presence } from '../objects/types';
 
 export function callEvent(client: Client): void {
@@ -7,7 +7,7 @@ export function callEvent(client: Client): void {
         const presence: Presence = require('../../resources/presence.json');
 
         client.user?.setPresence({
-            status: presence['status'],
+            status: presence.status as PresenceStatusData,
             activity: {
                 name: presence['activity']['message'],
                 type: presence['activity']['type']

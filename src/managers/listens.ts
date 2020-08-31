@@ -45,6 +45,8 @@ export function loadListeners(client: Client, dirPath: fs.PathLike): void {
             // eslint-disable-next-line @typescript-eslint/no-var-requires
             const listener = require(resolvedPath);
             listener.callEvent(client);
+
+            console.log(`Loaded ${file}`);
         } catch (error) {
             console.error(error);
         }

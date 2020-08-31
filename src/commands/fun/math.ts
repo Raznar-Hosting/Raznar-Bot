@@ -8,7 +8,7 @@ class MathCommand extends Command {
     public aliases: string[] = ['calc', 'calculator'];
     public desc = 'You can do math stuff here';
 
-    public async execute(prefix: string, args: string[], msg: Message) {
+    public async execute(_: string, args: string[], msg: Message) {
         if (!args[0])
             return msg.channel.send("**Enter Something To Calculate**");
 

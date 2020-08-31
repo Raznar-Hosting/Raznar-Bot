@@ -19,7 +19,7 @@ class TicketCommand extends Command {
             return module.exports.execute(prefix, ['help'], msg);
 
         const config: Config = require('../../../resources/config.json');
-        const packaging: Package = require('../../index');
+        const packaging: Package = require('../../index').objects;
 
         const ticketdb = packaging.ticketdb;
         const category = guild?.channels.cache.get(config['channels']['ticket-category']);

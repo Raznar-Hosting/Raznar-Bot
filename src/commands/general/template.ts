@@ -10,7 +10,7 @@ class TemplateCommand extends Command {
     public aliases: string[] = ['link', 'promote', 'discord'];
     public desc = 'Shows the discord information';
 
-    public async execute(prefix: string, args: string[], msg: Message) {
+    public async execute(_: string, __: string[], msg: Message) {
         const templateContent = fs.readFileSync('./resources/template-promotion.txt', { encoding: 'utf-8' });
         const config: Config = require('../../../resources/config.json');
 

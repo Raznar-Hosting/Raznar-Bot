@@ -9,9 +9,9 @@ class HelpCommand extends Command {
     public aliases: string[] = ['helpme', 'idk'];
     public desc = 'Shows the full command list';
 
-    public async execute(prefix: string, args: string[], msg: Message) {
+    public async execute(_: string, args: string[], msg: Message) {
         const config: Config = require('../../../resources/config.json');
-        const packaging: Packaging = require('../../index');
+        const packaging: Packaging = require('../../index').objects;
 
         const cmdManager = packaging.cmdManager;
         const { channel } = msg;

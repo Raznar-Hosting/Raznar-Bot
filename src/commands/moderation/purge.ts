@@ -7,7 +7,7 @@ class PurgeCommand extends Command {
     public aliases: string[] = ['clear', 'clean'];
     public desc = 'Clears a channel with a certain amount of messages';
 
-    public async execute(prefix: string, args: string[], msg: Message) {
+    public async execute(_: string, args: string[], msg: Message) {
         const { channel, member } = msg;
         if (!(channel instanceof TextChannel))
             return;

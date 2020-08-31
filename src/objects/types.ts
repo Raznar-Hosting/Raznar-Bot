@@ -1,4 +1,4 @@
-import { ActivityType, Client, PresenceStatusData } from 'discord.js';
+import { ActivityType, Client } from 'discord.js';
 import { CommandManager } from '../managers/commands';
 import { Database } from 'better-sqlite3';
 

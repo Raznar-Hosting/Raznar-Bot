@@ -30,13 +30,16 @@ if (!fs.existsSync('./resources/presence.json')) {
     );
 }
 
-loadListeners(client, './listeners/');
+loadListeners(client, './dist/listeners/');
 
-cmdManager.loadCommands('./src/commands/');
-cmdManager.startWorking(client, './resources/config.json');
+cmdManager.loadCommands('./dist/commands/');
+cmdManager.startWorking(client);
 
 // creates the database dir
-fs.mkdirSync('./db');
+try {
+    fs.mkdirSync('./db');
+} catch (error) {
+}
 
 const ticketdb = sqlite('./db/ticket.db');
 ticketdb.prepare('CREATE TABLE IF NOT EXISTS tickets (user_id VARCHAR(128) NOT NULL, channel_id VARCHAR(128) NOT NULL);')
