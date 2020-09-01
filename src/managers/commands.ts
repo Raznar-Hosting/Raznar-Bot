@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Client, Message } from 'discord.js';
 import fs from 'fs';

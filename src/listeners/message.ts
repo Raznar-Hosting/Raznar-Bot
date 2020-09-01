@@ -41,7 +41,7 @@ const blacklistedWords = [
     // bacot
     /b(a|4)+c(o|0)+(t|d)+/gi,
     // bocah
-    /b(a|4)+c(a|4)+h+/gi,
+    /b(o|0)+c(a|4)+h+/gi,
     // cacat
     /c(a|4)*c(a|4)*(d|t)/gi,
     // mati
