@@ -25,19 +25,9 @@ const blacklistedWords = [
     // tetek
     /t(e|3)+t(e|3)+k?/gi,
     // kimak
-    /k(i|1)+m(a|4)+k/gi,
-    // pussy
-    /pu*ss+y/gi,
-    // dick
-    /d(i|1)+ck/gi,
+    /(k|q)(i|1)+m(a|4)+(k|q)/gi,
     // babi
     /b(a|4)+b(i|1)+/gi,
-    // nigga
-    /\bn(i|1)*gg(a|e|3|4)*r?/gi,
-    // fucking
-    /fu*cki*(ng)?/gi,
-    // faggot
-    /f(a|4)*gg(o|0)*t/gi,
     // ngentot
     /ng(e|3)*nt(o|0|u)*(t|d)/gi,
     // coli
@@ -46,18 +36,43 @@ const blacklistedWords = [
     /k(a|4)*mpr(e|3)*t/gi,
     // asu
     /_?-?\ba+su+\b-?_?/gi,
+    // bokep
+    /b(o|0)+k(e|3)+p/gi,
+    // bacot
+    /b(a|4)+c(o|0)+(t|d)+/gi,
+    // bocah
+    /b(a|4)+c(a|4)+h+/gi,
+    // cacat
+    /c(a|4)*c(a|4)*(d|t)/gi,
+    // mati
+    /m(a|4)+t(i|1)+/gi,
+
+    // --- ENGLISH ---
+
+    // nigga
+    /\bn(i|1)*gg(a|e|3|4)*r?/gi,
+    // fucking
+    /fu*cki*(ng)?/gi,
+    // faggot
+    /f(a|4)*gg(o|0)*t/gi,
     //boobs
     /b(0|o)(o|0)+bs?/gi,
     //bitches
     /b(i|1)+tch/gi,
+    // pussy
+    /pu*ss+y/gi,
+    // dick
+    /d(i|1)+ck/gi,
     // autis
     /aut(i|1)*s/gi,
     // hentai
     /h(e|3)+nt(a|4)+i+/gi,
     // porn
     /p(o|0)+rn/gi,
-    // bokep
-    /b(o|0)+k(e|3)+p/gi
+    // shit
+    /sh(i|4)+t/gi,
+    // cunt
+    /cu+nt/gi
 ];
 
 export function callEvent(client: Client): void {
