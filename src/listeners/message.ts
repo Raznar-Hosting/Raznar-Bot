@@ -13,7 +13,7 @@ const blacklistedWords = [
     // bangsat
     /b(a|4)*n?gs(a|4)*(t|d)/gi,
     // tolol
-    /t(o|0)+l(o|0)+l?/gi,
+    /t(o|0)+l(o|0)+l?\b/gi,
     // pantek
     /p(a|4)*nt(e|3)*k/gi,
     // goblok
