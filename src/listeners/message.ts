@@ -45,7 +45,7 @@ const blacklistedWords = [
     // cacat
     /c(a|4)*c(a|4)*(d|t)/gi,
     // mati
-    /m(a|4)+t(i|1)+/gi,
+    /\bm(a|4)+t(i|1)+\b/gi,
 
     // --- ENGLISH ---
 
