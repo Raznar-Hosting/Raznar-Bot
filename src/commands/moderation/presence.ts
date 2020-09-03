@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable indent */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { ActivityType, Message, PresenceStatusData } from 'discord.js';

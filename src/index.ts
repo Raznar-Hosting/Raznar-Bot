@@ -39,6 +39,7 @@ cmdManager.startWorking(client);
 try {
     fs.mkdirSync('./db');
 } catch (error) {
+    console.error(error);
 }
 
 const ticketdb = sqlite('./db/ticket.db');

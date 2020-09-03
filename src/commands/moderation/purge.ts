@@ -12,7 +12,6 @@ class PurgeCommand extends Command {
         if (!(channel instanceof TextChannel))
             return;
 
-
         if (!member?.hasPermission('MANAGE_MESSAGES'))
             return channel.send('No permission!').then(m => m.delete({ timeout: 3_000 }));
 

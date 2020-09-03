@@ -24,7 +24,7 @@ class EvalCommand extends Command {
 
         if (codeInput.includes(client.token!)) {
             await msg.delete({ timeout: 50 });
-            const res = await channel.send('Invalid code input!')
+            const res = await channel.send('Invalid code input!');
 
             return await res.delete({ timeout: 1_000 });
         }

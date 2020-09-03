@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Client, Message } from 'discord.js';
@@ -151,7 +152,7 @@ export class CommandManager {
 
             // executes the command once all checks has been passed
             try {
-                command.execute(this.prefix, args, msg);
+                await command.execute(this.prefix, args, msg);
             } catch (error) {
                 console.error(error);
             }

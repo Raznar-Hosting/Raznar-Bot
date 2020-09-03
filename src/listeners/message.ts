@@ -120,4 +120,23 @@ export function callEvent(client: Client): void {
             return channel.send('Hi there ' + msg.author.toString() + '! My command prefix is `' + prefix + '`!');
         }
     });
+
+    client.on('messageUpdate', async (_, newMsg) => {
+        const { content, channel } = newMsg;
+
+        // in this one line of code
+        // it uses the badwords regex list to find a bad word within the message
+        const foundUsingWords = blacklistedWords.find(regex => content?.match(regex));
+
+        if (!foundUsingWords)
+            return;
+
+        newMsg.delete();
+
+        const embed = new MessageEmbed()
+            .setDescription('Please, watch your language!')
+            .setColor('RED');
+
+        return channel.send(embed).then(m => m.delete({ timeout: 5_000 }));
+    });
 }
