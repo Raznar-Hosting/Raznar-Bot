@@ -12,7 +12,7 @@ class SayCommand extends Command {
 
         if (!member?.hasPermission('ADMINISTRATOR'))
             return channel.send('No permission!').then(m => m.delete({ timeout: 3_000 }));
-        if (!args)
+        if (!args[0])
             return channel.send(`Usage: ${prefix}say <message>`);
 
         const content = args.join(' ');
