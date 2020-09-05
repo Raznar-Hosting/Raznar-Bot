@@ -1,4 +1,5 @@
-import { Message } from 'discord.js';
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { Guild, Message } from 'discord.js';
 import { Command } from '../../managers/commands';
 
 class SayCommand extends Command {
@@ -8,7 +9,7 @@ class SayCommand extends Command {
     public desc = 'The command to be able to say something as the bot!';
 
     public async execute(prefix: string, args: string[], msg: Message) {
-        const { channel, member } = msg;
+        const { channel, member, guild } = msg;
 
         if (!member?.hasPermission('ADMINISTRATOR'))
             return channel.send('No permission!').then(m => m.delete({ timeout: 3_000 }));
@@ -16,12 +17,15 @@ class SayCommand extends Command {
             return channel.send(`Usage: ${prefix}say <message>`);
 
         let content = args.join(' ');
-        content = this.filterEmoji(content);
+        content = this.filterEmoji(content, guild!);
 
         return channel.send(content);
     }
 
-    private filterEmoji(content: string): string {
+    /**
+     * Filters the newly formatted emojis into a valid emojis readable to Discord
+     */
+    private filterEmoji(content: string, guild: Guild): string {
         const regex = /{([a-zA-Z0-9_-]+)}/gi;
         let newContent = content;
         let result: RegExpExecArray | null;
@@ -31,12 +35,16 @@ class SayCommand extends Command {
                 regex.lastIndex++;
 
             const fullEmoji = result[0];
-            const emoji = result[1];
+            const emojiName = result[1];
 
-            if (!fullEmoji || !emoji)
+            if (!fullEmoji || !emojiName)
                 continue;
 
-            newContent = newContent.replace(fullEmoji, `:${emoji}:`);
+            const emoji = guild.emojis.cache.find(e => e.name === emojiName);
+            if (!emoji)
+                continue;
+
+            newContent = newContent.replace(fullEmoji, emoji.toString());
         }
 
         return newContent;
