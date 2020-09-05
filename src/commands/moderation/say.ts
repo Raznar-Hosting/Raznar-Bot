@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Guild, Message } from 'discord.js';
+import { Guild, Message, MessageEmbed } from 'discord.js';
 import { Command } from '../../managers/commands';
 
 class SayCommand extends Command {
@@ -19,7 +19,29 @@ class SayCommand extends Command {
         let content = args.join(' ');
         content = this.filterEmoji(content, guild!);
 
-        return channel.send(content);
+        /**
+         * Handles filtering a single parameter
+         * this'll try to find the parameter and then removes it from the message content
+         * 
+         * @param param the parameter value
+         * @returns `true` if the parameter is found, otherwise `false`
+         */
+        function filterSingleParam(param: string): boolean {
+            const list = content.split(' ');
+            const result = list.filter(str => str !== param);
+
+            content = result.join(' ');
+            return list.length === result.length;
+        }
+
+        let finalMessage: string | MessageEmbed;
+        if (filterSingleParam('-em'))
+            finalMessage = new MessageEmbed()
+                .setDescription(content);
+        else
+            finalMessage = content;
+
+        return channel.send(finalMessage);
     }
 
     /**
