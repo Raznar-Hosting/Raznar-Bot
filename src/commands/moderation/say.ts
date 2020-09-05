@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Guild, Message, MessageEmbed } from 'discord.js';
+import { ColorResolvable, Guild, Message, MessageEmbed } from 'discord.js';
 import { Command } from '../../managers/commands';
 
 class SayCommand extends Command {
@@ -70,19 +70,28 @@ class SayCommand extends Command {
         }
 
         let finalMessage: string | MessageEmbed;
+
         const title = filterDoubleParam('-t');
+        const color = filterDoubleParam('-c');
 
-        if (filterSingleParam('-em')) {
-            finalMessage = new MessageEmbed()
-                .setDescription(content);
+        try {
+            if (filterSingleParam('-em')) {
+                finalMessage = new MessageEmbed()
+                    .setDescription(content);
 
-            if (title)
-                finalMessage.setTitle(title.value);
-        } else {
-            finalMessage = content;
+                if (title)
+                    finalMessage.setTitle(title.value);
+                if (color)
+                    finalMessage.setColor(color.value as ColorResolvable);
+            } else {
+                finalMessage = content;
+            }
+
+            return channel.send(finalMessage);
+        } catch (error) {
+            return channel.send(`An error has occurred! ${error}`)
+                .then(m => m.delete({timeout: 5_000}));
         }
-
-        return channel.send(finalMessage);
     }
 
     /**
