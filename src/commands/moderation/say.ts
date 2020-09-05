@@ -22,13 +22,13 @@ class SayCommand extends Command {
     }
 
     private filterEmoji(content: string): string {
-        const filter = /{[a-zA-Z0-9_-]+}/gi;
+        const regex = /{([a-zA-Z0-9_-]+)}/gi;
         let newContent = content;
         let result: RegExpExecArray | null;
 
-        while ((result = filter.exec(content)) !== null) {
-            if (result.index >= filter.lastIndex)
-                filter.lastIndex++;
+        while ((result = regex.exec(content)) !== null) {
+            if (result.index === regex.lastIndex)
+                regex.lastIndex++;
 
             const fullEmoji = result[0];
             const emoji = result[1];
