@@ -31,7 +31,7 @@ class SayCommand extends Command {
             const result = list.filter(str => str !== param);
 
             content = result.join(' ');
-            return list.length === result.length;
+            return !!list.find(str => str === param);
         }
 
         let finalMessage: string | MessageEmbed;
