@@ -143,7 +143,9 @@ export class CommandManager {
             if (!content.startsWith(this.prefix))
                 return;
 
-            const args = content.substring(this.prefix.length).split(' ');
+            const args = content.substring(this.prefix.length)
+                .split(' ')
+                .filter(str => !!str);
             const name = args.shift()!.toLowerCase();
 
             const command = this.findCommand(name);

@@ -35,7 +35,7 @@ class EvalCommand extends Command {
             .setColor(0x00FF2E)
             .addField(':inbox_tray: Code Input', '```js\n' + codeInput + '```');
 
-        msg.delete({ timeout: 50 });
+        msg.delete({ timeout: 100 });
         try {
             let result = eval(codeInput);
             // if the result isn't a string, then inspect the object 
