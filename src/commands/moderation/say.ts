@@ -36,7 +36,7 @@ class SayCommand extends Command {
             if (!fullEmoji || !emoji)
                 continue;
 
-            newContent = content.replace(fullEmoji, `:${emoji}:`);
+            newContent = newContent.replace(fullEmoji, `:${emoji}:`);
         }
 
         return newContent;
