@@ -19,5 +19,5 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Running NodeJS
-        run: yarn start
+      - name: Builds the TypeScript
+        run: yarn run build

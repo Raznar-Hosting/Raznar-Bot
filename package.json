@@ -1,11 +1,12 @@
 {
   "name": "raznar-bot",
-  "version": "2.10.15",
+  "version": "2.10.16",
   "main": "dist/index.js",
   "description": "The discord bot for Raznar Store",
   "scripts": {
     "start": "node cleaner.js && tsc && node dist/index.js",
-    "test": "node test/test.js"
+    "test": "node test/test.js",
+    "build": "tsc"
   },
   "dependencies": {
     "axios": "^0.20.0",
