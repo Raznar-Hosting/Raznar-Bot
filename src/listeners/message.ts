@@ -55,9 +55,9 @@ const blacklistedWords = [
     /fu*cki*(ng)?/gi,
     // faggot
     /f(a|4)*gg(o|0)*t/gi,
-    //boobs
+    // boobs
     /b(0|o)(o|0)+bs?/gi,
-    //bitches
+    // bitches
     /b(i|1)+tch/gi,
     // pussy
     /pu*ss+y/gi,
@@ -79,28 +79,25 @@ export function callEvent(client: Client): void {
     client.on('message', async (msg) => {
         const { channel, content } = msg;
 
-        // don't allow bot to mention the bot
-        if (msg.author.bot)
-            return;
         // don't allow dm
         if (channel.type === 'dm')
-            return channel.send("The bot doesn't support DMs!");
+            return;
 
         // in this one line of code
         // it uses the badwords regex list to find a bad word within the message
         const foundUsingWords = blacklistedWords.find(regex => content.match(regex));
 
+        if (content.toLowerCase().includes('color code') || content.toLowerCase() === 'color')
+            return channel.send('Aye aye sir!, `§`');
+
         // once it's found it'll stop after deleting the message 
         // and sending a warning message
-        if (msg.content.includes("color code"))
-            return channel.send("Aye aye sir!, `§`");
-
         if (foundUsingWords) {
-            msg.delete();
+            msg.delete({ timeout: 100 });
 
             const embed = new MessageEmbed()
                 .setDescription('Please, watch your language!')
-                .setColor('RED');
+                .setColor(0xFF0000);
 
             return channel.send(embed).then(m => m.delete({ timeout: 5_000 }));
         }
@@ -127,15 +124,15 @@ export function callEvent(client: Client): void {
         // in this one line of code
         // it uses the badwords regex list to find a bad word within the message
         const foundUsingWords = blacklistedWords.find(regex => content?.match(regex));
-
         if (!foundUsingWords)
             return;
 
-        newMsg.delete();
-
+        // once it's found it'll stop after deleting the message 
+        // and sending a warning message
+        newMsg.delete({ timeout: 100 });
         const embed = new MessageEmbed()
             .setDescription('Please, watch your language!')
-            .setColor('RED');
+            .setColor(0xFF0000);
 
         return channel.send(embed).then(m => m.delete({ timeout: 5_000 }));
     });

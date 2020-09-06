@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { ColorResolvable, Guild, Message, MessageEmbed } from 'discord.js';
 import { Command } from '../../managers/commands';
+import { Config } from '../../objects/types';
 
 class SayCommand extends Command {
 
@@ -82,6 +84,7 @@ class SayCommand extends Command {
         }
 
         let finalMessage: string | MessageEmbed;
+        const config: Config = require('../../../resources/config.json');
 
         try {
             if (filterSingleParam('-em')) {
@@ -90,7 +93,8 @@ class SayCommand extends Command {
                 const footer = filterParamValue('-b');
 
                 finalMessage = new MessageEmbed()
-                    .setDescription(content);
+                    .setDescription(content)
+                    .setFooter(config.footer);
 
                 if (title)
                     finalMessage.setTitle(title.value);
@@ -102,9 +106,11 @@ class SayCommand extends Command {
                 finalMessage = content;
             }
 
-            return channel.send(finalMessage);
+            await channel.send(finalMessage);
+            if (filterSingleParam('-m'))
+                await channel.send('@here');
         } catch (error) {
-            return channel.send(`An error has occurred! ${error}`)
+            await channel.send(`An error has occurred! ${error}`)
                 .then(m => m.delete({timeout: 5_000}));
         }
     }
