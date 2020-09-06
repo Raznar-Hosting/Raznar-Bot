@@ -62,7 +62,7 @@ class SayCommand extends Command {
             const index = list.findIndex(str => str === param);
             // if the index isn't found or there's no value, failed
             if (index < 0 || list.length - 1 <= index)
-                return {};
+                return null;
 
             const regex = /\\(.+)\\/gi;
             let value;
@@ -72,11 +72,11 @@ class SayCommand extends Command {
 
             if (found) {
                 value = keyValueMessage.split('\\')[1];
-                
+
                 content = content.replace(param, '')
                     .replace(`\\${value}\\`, '');
             } else {
-                return {};
+                return null;
             }
 
             cleanEmptySpaces();
@@ -84,7 +84,9 @@ class SayCommand extends Command {
         }
 
         let finalMessage: string | MessageEmbed;
+
         const config: Config = require('../../../resources/config.json');
+        const useMention = filterSingleParam('-m');
 
         try {
             if (filterSingleParam('-em')) {
@@ -96,22 +98,19 @@ class SayCommand extends Command {
                     .setDescription(content)
                     .setFooter(config.footer);
 
-                if (title)
-                    finalMessage.setTitle(title.value);
-                if (color)
-                    finalMessage.setColor(color.value as ColorResolvable);
-                if (footer)
-                    finalMessage.setFooter(footer.value);
+                if (title) finalMessage.setTitle(title.value);
+                if (color) finalMessage.setColor(color.value as ColorResolvable);
+                if (footer) finalMessage.setFooter(footer.value);
             } else {
                 finalMessage = content;
             }
 
             await channel.send(finalMessage);
-            if (filterSingleParam('-m'))
+            if (useMention)
                 await channel.send('@here');
         } catch (error) {
             await channel.send(`An error has occurred! ${error}`)
-                .then(m => m.delete({timeout: 5_000}));
+                .then(m => m.delete({ timeout: 5_000 }));
         }
     }
 

@@ -1,6 +1,6 @@
 {
   "name": "raznar-bot",
-  "version": "2.11.28",
+  "version": "2.11.29",
   "main": "dist/index.js",
   "description": "The discord bot for Raznar Store",
   "scripts": {
