@@ -23,8 +23,7 @@ class SayCommand extends Command {
          * Handles cleaning empty spaces
          */
         function cleanEmptySpaces() {
-            const list = content.split(' ');
-            content = list.filter(str => !!str).join(' ');
+            content = content.split(' ').filter(str => !!str).join(' ');
         }
 
         /**
@@ -64,13 +63,13 @@ class SayCommand extends Command {
                 return {};
 
             const regex = /\\(.+)\\/gi;
-            const joinMessage = list.splice(index).join(' ');
-
             let value;
 
-            const found = regex.exec(joinMessage);
+            const keyValueMessage = list.splice(index).join(' ');
+            const found = regex.exec(keyValueMessage);
+
             if (found) {
-                value = joinMessage.split('\\')[1];
+                value = keyValueMessage.split('\\')[1];
                 
                 content = content.replace(param, '')
                     .replace(`\\${value}\\`, '');
@@ -84,18 +83,21 @@ class SayCommand extends Command {
 
         let finalMessage: string | MessageEmbed;
 
-        const title = filterParamValue('-t');
-        const color = filterParamValue('-c');
-
         try {
             if (filterSingleParam('-em')) {
                 finalMessage = new MessageEmbed()
                     .setDescription(content);
 
+                const title = filterParamValue('-t');
+                const color = filterParamValue('-c');
+                const footer = filterParamValue('-b');
+
                 if (title)
                     finalMessage.setTitle(title.value);
                 if (color)
                     finalMessage.setColor(color.value as ColorResolvable);
+                if (footer)
+                    finalMessage.setFooter(footer.value);
             } else {
                 finalMessage = content;
             }
