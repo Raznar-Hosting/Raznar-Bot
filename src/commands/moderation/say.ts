@@ -8,15 +8,43 @@ class SayCommand extends Command {
 
     public name = 'say';
     public aliases: string[] = [];
-    public desc = 'The command to be able to say something as the bot!';
+    public desc = "Use the command and you'll know what it does and what it can do!";
 
     public async execute(prefix: string, args: string[], msg: Message) {
-        const { channel, member, guild } = msg;
+        const config: Config = require('../../../resources/config.json');
+        const { channel, member, guild, client } = msg;
 
         if (!member?.hasPermission('ADMINISTRATOR'))
-            return channel.send('No permission!').then(m => m.delete({ timeout: 3_000 }));
-        if (!args[0])
-            return channel.send(`Usage: ${prefix}say <message>`);
+            return await channel.send('No permission!').then(m => m.delete({ timeout: 3_000 }));
+        if (!args[0]) {
+            const info = [
+                'This commands allows you to send a message that is sent by the bot!',
+                '',
+                'There are a bunch of filters/parameters that you can use to make a beautiful message.',
+                'And those are:',
+                '**●** `-em` - To make the message an embedded message',
+                '**●** `-t \\<title>\\` - To set title to the embedded message',
+                '**●** `-c \\<color>\\` - To set the embedded message color',
+                '**●** `-f \\<footer>\\` - To set the embedded message footer, by default it\'s using the one from config',
+                '**●** `-m` - To add the `@here` tag/mention to your message!',
+                '',
+                `**Command Usage:** ${prefix}say <message> <filters...>`,
+                '**Examples:**',
+                '',
+                `**●** ${prefix}say just some random message -em -c \\RANDOM\\`,
+                `**●** ${prefix}say Today, we have a good news and bad news -em -t \\Official Announcement\\ -c \\FF0000\\`,
+                `**●** ${prefix}say yes -em -f \\Just a simple footer\\`
+            ].join('\n');
+
+            const embed = new MessageEmbed()
+                .setDescription(info)
+                .setFooter(config.footer)
+                .setColor(0x00E6FF)
+                .setThumbnail(client.user!.displayAvatarURL())
+                .setTitle('`say` Command information');
+
+            return await channel.send(embed);
+        }
 
         let content = args.join(' ');
         content = this.filterEmoji(content, guild!);
@@ -84,15 +112,13 @@ class SayCommand extends Command {
         }
 
         let finalMessage: string | MessageEmbed;
-
-        const config: Config = require('../../../resources/config.json');
         const useMention = filterSingleParam('-m');
 
         try {
             if (filterSingleParam('-em')) {
                 const title = filterParamValue('-t');
                 const color = filterParamValue('-c');
-                const footer = filterParamValue('-b');
+                const footer = filterParamValue('-f');
 
                 finalMessage = new MessageEmbed()
                     .setDescription(content)
