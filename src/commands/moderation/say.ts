@@ -24,7 +24,7 @@ class SayCommand extends Command {
          */
         function cleanEmptySpaces() {
             const list = content.split(' ');
-            content = list.filter(str => !!str).join();
+            content = list.filter(str => !!str).join(' ');
         }
 
         /**
