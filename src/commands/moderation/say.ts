@@ -20,6 +20,14 @@ class SayCommand extends Command {
         content = this.filterEmoji(content, guild!);
 
         /**
+         * Handles cleaning empty spaces
+         */
+        function cleanEmptySpaces() {
+            const list = content.split(' ');
+            content = list.filter(str => !!str).join();
+        }
+
+        /**
          * Handles filtering a single parameter
          * this'll try to find the parameter and then removes it from the message content
          * 
@@ -31,11 +39,13 @@ class SayCommand extends Command {
             const result = list.filter(str => str !== param);
 
             content = result.join(' ');
+            cleanEmptySpaces();
+
             return list.length !== result.length;
         }
 
         /**
-         * Handles filtering a double parameter or key value pair
+         * Handles filtering a key value pair like parameters
          * 
          * The sample is like `-t \hey guys\` where the `-t` is the key
          * and the `\hey guys\` is the value.
@@ -45,7 +55,7 @@ class SayCommand extends Command {
          * @param param the accepted parameter
          * @returns the key-value pair in object, ex: {key: '-t', value: 'hey guys'}
          */
-        function filterDoubleParam(param: string) {
+        function filterParamValue(param: string) {
             const list = content.split(' ');
             // the param index
             const index = list.findIndex(str => str === param);
@@ -56,23 +66,26 @@ class SayCommand extends Command {
             const regex = /\\(.+)\\/gi;
             const joinMessage = list.splice(index).join(' ');
 
-            let value: string;
+            let value;
 
             const found = regex.exec(joinMessage);
             if (found) {
-                value = found[1];
-                content = content.replace(param, '').replace(found[0], '');
+                value = joinMessage.split('\\')[1];
+                
+                content = content.replace(param, '')
+                    .replace(`\\${value}\\`, '');
             } else {
                 return {};
             }
 
+            cleanEmptySpaces();
             return { key: param, value: value };
         }
 
         let finalMessage: string | MessageEmbed;
 
-        const title = filterDoubleParam('-t');
-        const color = filterDoubleParam('-c');
+        const title = filterParamValue('-t');
+        const color = filterParamValue('-c');
 
         try {
             if (filterSingleParam('-em')) {
