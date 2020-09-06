@@ -85,12 +85,12 @@ class SayCommand extends Command {
 
         try {
             if (filterSingleParam('-em')) {
-                finalMessage = new MessageEmbed()
-                    .setDescription(content);
-
                 const title = filterParamValue('-t');
                 const color = filterParamValue('-c');
                 const footer = filterParamValue('-b');
+
+                finalMessage = new MessageEmbed()
+                    .setDescription(content);
 
                 if (title)
                     finalMessage.setTitle(title.value);

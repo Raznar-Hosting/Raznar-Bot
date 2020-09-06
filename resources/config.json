@@ -1,6 +1,6 @@
 {
     "prefix": "!",
-    "footer": "Copyright (c) 2020 Raznar Development Team",
+    "footer": "Copyright (c) 2020 RaznarLab",
     "bot-lock": true,
     "roles": {
         "everyone": "742574615498588221",
