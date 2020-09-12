@@ -7,7 +7,7 @@ class PurgeCommand extends Command {
     public aliases: string[] = ['clear', 'clean'];
     public desc = 'Clears a channel with a certain amount of messages';
 
-    public async execute(_: string, args: string[], msg: Message) {
+    public async execute(prefix: string, args: string[], msg: Message) {
         const { channel, member } = msg;
         if (!(channel instanceof TextChannel))
             return;
@@ -15,8 +15,8 @@ class PurgeCommand extends Command {
         if (!member?.hasPermission('MANAGE_MESSAGES'))
             return channel.send('No permission!').then(m => m.delete({ timeout: 3_000 }));
 
-        if (isNaN(+args[0]))
-            return msg.channel.send('Please provide a valid amount to purge!');
+        if (!args[0] || isNaN(+args[0]))
+            return msg.channel.send(`Usage: ${prefix}purge <amount of messages>`);
 
         const amount = +args[0];
         if (amount > 100)
@@ -24,7 +24,8 @@ class PurgeCommand extends Command {
 
         channel.bulkDelete(amount)
             .then(messages =>
-                msg.channel.send(`Successfully deleted ${messages.size}/${args[0]} messages!`)
+                msg.channel
+                    .send(`Successfully deleted ${messages.size}/${args[0]} messages!`)
                     .then(m => m.delete({ timeout: 10_000 }))
             );
     }
