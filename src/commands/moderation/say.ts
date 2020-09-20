@@ -33,7 +33,9 @@ class SayCommand extends Command {
                 '',
                 `**●** ${prefix}say just some random message -em -c \\RANDOM\\`,
                 `**●** ${prefix}say Today, we have a good news and bad news -em -t \\Official Announcement\\ -c \\FF0000\\`,
-                `**●** ${prefix}say yes -em -f \\Just a simple footer\\`
+                `**●** ${prefix}say yes -em -f \\Just a simple footer\\`,
+                ``,
+                `**Extra**: Emojis can also be applied with ${'`{EMOJI_NAME}`'}!`
             ].join('\n');
 
             const embed = new MessageEmbed()
