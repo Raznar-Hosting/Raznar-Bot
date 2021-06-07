@@ -13,7 +13,7 @@
     "@types/cheerio": "^0.22.21",
     "@types/mathjs": "^6.0.5",
     "axios": "^0.20.0",
-    "better-sqlite3": "^7.1.1",
+    "better-sqlite3": "^7.4.1",
     "canvas": "^2.6.1",
     "cheerio": "^1.0.0-rc.3",
     "discord.js": "^12.3.1",
