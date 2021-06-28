@@ -74,10 +74,10 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@types/better-sqlite3@^5.4.0":
-  version "5.4.0"
-  resolved "https://registry.yarnpkg.com/@types/better-sqlite3/-/better-sqlite3-5.4.0.tgz#ab7336ccc2e31bd88247016c675cfcb01df99787"
-  integrity sha512-nzm7lJ7l3jBmGUbtkL8cdOMhPkN6Pw2IM+b0V7iIKba+YKiLrjkIy7vVLsBIVnd7+lgzBzrHsXZxCaFTcmw5Ow==
+"@types/better-sqlite3@^5.4.2":
+  version "5.4.2"
+  resolved "https://registry.yarnpkg.com/@types/better-sqlite3/-/better-sqlite3-5.4.2.tgz#d2b0692935d0a9faf5200090ad0bdf7fba5408a6"
+  integrity sha512-t7SdiL8NNGibdXmqfLbp9ZL87DcV+SgjCvO2E8elTG/f4eO4Vu+TkmqzmTuPXulDzOwKv3Aj2Jlocqdb+CSefA==
   dependencies:
     "@types/integer" "*"
 
