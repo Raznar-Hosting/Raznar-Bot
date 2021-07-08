@@ -9,7 +9,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@types/better-sqlite3": "^5.4.0",
+    "@types/better-sqlite3": "^5.4.3",
     "@types/cheerio": "^0.22.21",
     "@types/mathjs": "^6.0.5",
     "axios": "^0.20.0",
